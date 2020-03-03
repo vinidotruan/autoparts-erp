@@ -17,4 +17,10 @@ Primeiros passos
      - MAIL_FROM_ADDRESS=umemailqualquer@email.com
      - MAIL_FROM_NAME=UmNomeQualquer
 
- Para testar as funcionalidades basta rodar o comando: `php artisan serve`
+Para testar as funcionalidades basta rodar o comando: `php artisan serve`
+ 
+Para testar a api os headers que devem ser adicionados são so seguintes:
+
+ - Content-Type: application/json
+ - X-Requested-With: XMLHttpRequest
+ - Authorization: Bearer token
