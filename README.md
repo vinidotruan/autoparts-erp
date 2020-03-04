@@ -24,3 +24,10 @@ Para testar a api os headers que devem ser adicionados são so seguintes:
  - Content-Type: application/json
  - X-Requested-With: XMLHttpRequest
  - Authorization: Bearer token
+
+Observações:
+---
+
+ - Todas as informações para testar o "reset" de password estão contidas [neste artigo](https://medium.com/modulr/api-rest-with-laravel-5-6-passport-authentication-reset-password-part-4-50d27455dcca)
+
+ - Fora instalado o laravel cors
