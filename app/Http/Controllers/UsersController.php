@@ -23,4 +23,11 @@ class UsersController extends Controller
 
         return response('sucess', 200);
     }
+
+    public function all()
+    {
+        $users = User::all();
+
+        return response($users, 200);
+    }
 }

@@ -39,3 +39,4 @@ Route::group([
 
 Route::post("update-user/{user}", "UsersController@update");
 Route::get("delete-user/{user}", "UsersController@delete");
+Route::get("list-users", "UsersController@all");
