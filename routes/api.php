@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\Passport;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 Route::group([
     'prefix' => 'auth',
@@ -36,11 +37,5 @@ Route::group([
     Route::resource('sales','SalesController');
 });
 
-Route::get("update-user/{user}", function(){
-    if(Gate::allows("admin-only")){
-        return redirect()->action(
-            'UsersController@update'
-        );
-    }
-        return json_encode($user->role()->name);
-});
+Route::post("update-user/{user}", "UsersController@update");
+Route::get("delete-user/{user}", "UsersController@delete");
