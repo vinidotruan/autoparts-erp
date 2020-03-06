@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 Route::group([
     'prefix' => 'auth',
@@ -33,4 +34,13 @@ Route::group([
 ], function() {
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');
+});
+
+Route::get("update-user/{user}", function(){
+    if(Gate::allows("admin-only")){
+        return redirect()->action(
+            'UsersController@update'
+        );
+    }
+        return json_encode($user->role()->name);
 });

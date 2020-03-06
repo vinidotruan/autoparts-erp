@@ -26,6 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-        //
+        
+        Gate::define("admin-only", function ($user){
+            if($user->role()->name == "admin"){
+                return true;
+            }
+                return false;
+        });
     }
 }
