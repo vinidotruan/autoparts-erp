@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'user', 'password', 'email', 'cpf', 'activation_token'
+        "name", "user", "password", "email", "cpf", "activation_token"
     ];
 
     protected $dates = ['deleted_at'];
@@ -48,5 +48,15 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sales::class);
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(Logs::class);
     }
 }
