@@ -35,8 +35,5 @@ Route::group([
 ], function() {
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');
+    Route::resource('users','UsersController');
 });
-
-Route::post("update-user/{user}", "UsersController@update");
-Route::get("delete-user/{user}", "UsersController@delete");
-Route::get("list-users", "UsersController@all");
