@@ -16,7 +16,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::paginate(15);
 
-        return response()->json(['categories' => $categories]);
+        return response()->json($categories);
     }
 
     /**

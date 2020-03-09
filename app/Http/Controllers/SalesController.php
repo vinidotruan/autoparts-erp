@@ -16,7 +16,7 @@ class SalesController extends Controller
     {
         $sales = Sales::paginate(15);
 
-        return response()->json(['sales' => $sales]);
+        return response()->json($sales);
     }
 
     /**
