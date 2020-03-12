@@ -28,7 +28,8 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $sale = Sales::create($request->all());
-
+        $sale->product->amount -= $sale->amount;
+        $sale->product->save();
         return response()->json(['message' => 'Sale created']);
     }
 
