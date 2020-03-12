@@ -21,10 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->boolean('active')->default(false);
             $table->string('activation_token');
-            $table->unsignedBigInteger('roles_id')->nullable();
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreign('roles_id')->references('id')->on('roles');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
