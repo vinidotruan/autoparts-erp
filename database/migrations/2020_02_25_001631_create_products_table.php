@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('application');
             $table->double('value_cost');
             $table->double('value_sell');
-            $table->integer('amount');
+            $table->unsignedInteger('amount');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
