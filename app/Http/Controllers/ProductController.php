@@ -37,8 +37,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $response = Product::find($product->id);
-        return response()->json(['product' => $response]);
+        $response = Product::find($product->id)->load('category');
+        return response()->json($response);
     }
 
     /**

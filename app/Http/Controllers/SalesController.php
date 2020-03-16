@@ -42,7 +42,7 @@ class SalesController extends Controller
     public function show(Sales $sale)
     {
         $response = Sales::find($sale->id);
-        return response()->json(['sale' => $response]);
+        return response()->json($response);
     }
 
     /**
