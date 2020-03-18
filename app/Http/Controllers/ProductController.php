@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Facades\Input;
 
 class ProductController extends Controller
 {
@@ -66,5 +67,13 @@ class ProductController extends Controller
     {
         $product->delete();
         return response()->json(['message' => 'Product deleted']);
+    }
+
+    public function search(Request $request) {        
+        $field = key($request->all());
+        $value = current($request->all());
+        $product = Product::where($field, 'like', "%{$value}%")->paginate(15);
+        
+        return response()->json($product);
     }
 }

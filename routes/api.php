@@ -33,8 +33,17 @@ Route::group([
 Route::group([
     'middleware' => 'auth:api'
 ], function() {
+    
+    Route::group([
+        'prefix' => 'products'
+    ], function () {
+        Route::get('search', 'ProductController@search');
+    });
+
     Route::resource('categories','CategoriesController');
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');
     Route::resource('users','UsersController');
+
 });
+
