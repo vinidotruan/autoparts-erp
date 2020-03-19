@@ -12,9 +12,12 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(15);
+        if($request->page === "-1") {
+            return response()->json(Category::all());
+        }
+        $categories = Category::paginate(0);
 
         return response()->json($categories);
     }
