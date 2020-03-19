@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id');
             $table->string('title');
-            $table->integer('ref');
+            $table->unsignedBigInteger('ref');
             $table->text('application');
             $table->double('value_cost');
             $table->double('value_sell');
-            $table->integer('amount');
+            $table->unsignedInteger('amount');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

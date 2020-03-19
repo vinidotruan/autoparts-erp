@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Facades\Input;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(['products' => Product::paginate(15)], 200);
+        return response()->json(Product::paginate(15), 200);
     }
 
     /**
@@ -26,7 +27,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = Product::create($request->all());
-        return response()->json(['product' => $product, 'message' => 'Produto criado com sucesso!']);
+        return response()->json(['product' => $product, 'message' => 'Product created']);
     }
 
     /**
@@ -37,8 +38,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $response = Product::find($product->id);
-        return response()->json(['product' => $response]);
+        $response = Product::find($product->id)->load('category');
+        return response()->json($response);
     }
 
     /**
@@ -53,7 +54,7 @@ class ProductController extends Controller
         $product->update($request->all());
         $product->save();
 
-        return response()->json(['message' => 'Produto atualizado com sucesso']);
+        return response()->json(['message' => 'Product updated']);
     }
 
     /**
@@ -65,6 +66,14 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return response()->json(['message' => 'Produto deletado com sucesso']);
+        return response()->json(['message' => 'Product deleted']);
+    }
+
+    public function search(Request $request) {        
+        $field = key($request->all());
+        $value = current($request->all());
+        $product = Product::where($field, 'like', "%{$value}%")->paginate(15);
+        
+        return response()->json($product);
     }
 }

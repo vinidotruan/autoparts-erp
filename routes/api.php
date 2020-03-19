@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Laravel\Passport\Passport;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 Route::group([
     'prefix' => 'auth',
@@ -13,8 +15,8 @@ Route::group([
     Route::group([
         'middleware' => 'auth:api'
     ], function () {
-        Route::get('logout', 'Auth\AuthController@logout');
-        Route::get('user', 'Auth\AuthController@user');
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
     });
 });
 
@@ -31,6 +33,17 @@ Route::group([
 Route::group([
     'middleware' => 'auth:api'
 ], function() {
+    
+    Route::group([
+        'prefix' => 'products'
+    ], function () {
+        Route::get('search', 'ProductController@search');
+    });
+
+    Route::resource('categories','CategoriesController');
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');
+    Route::resource('users','UsersController');
+
 });
+

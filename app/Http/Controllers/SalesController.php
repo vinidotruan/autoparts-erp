@@ -14,17 +14,9 @@ class SalesController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $sales = Sales::paginate(15);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($sales);
     }
 
     /**
@@ -35,51 +27,47 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sale = Sales::create($request->all());
+        $sale->product->amount -= $sale->amount;
+        $sale->product->save();
+        return response()->json(['message' => 'Sale created']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sales  $sales
+     * @param  \App\Sales  $sale
      * @return \Illuminate\Http\Response
      */
-    public function show(Sales $sales)
+    public function show(Sales $sale)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Sales  $sales
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sales $sales)
-    {
-        //
+        $response = Sales::find($sale->id);
+        return response()->json($response);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sales  $sales
+     * @param  \App\Sales  $sale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sales $sales)
+    public function update(Request $request, Sales $sale)
     {
-        //
+        $sale->update($request->all());
+        return response()->json(['message' => "Sale updated"]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sales  $sales
+     * @param  \App\Sales  $sale
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sales $sales)
+    public function destroy(Sales $sale)
     {
-        //
+        $sale->delete();
+
+        return response()->json(["message" => "Sale deleted"]);
     }
 }
