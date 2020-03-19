@@ -5,7 +5,7 @@ Primeiros passos
 
  - `git clone git_url`
  - `php artisan composer install`
- - `php artisan migrate`
+ - `php artisan migrate --seed`
  - `php artisan passport:install`
  - configurar o arquivo .env com as seguintes configurações:
 
