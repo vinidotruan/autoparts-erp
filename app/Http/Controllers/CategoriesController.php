@@ -73,4 +73,12 @@ class CategoriesController extends Controller
         $category->delete();
         return response()->json(['message' => "Category deleted"]);
     }
+
+    public function search(Request $request) {        
+        $field = key($request->all());
+        $value = current($request->all());
+        $categories = Category::where($field, 'like', "%{$value}%")->paginate(15);
+        
+        return response()->json($categories);
+    }
 }
