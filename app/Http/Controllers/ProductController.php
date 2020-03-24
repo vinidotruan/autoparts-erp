@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(Product::paginate(15), 200);
+        return response()->json(Product::orderBy('title', 'asc')->paginate(15), 200);
     }
 
     /**
@@ -72,7 +72,7 @@ class ProductController extends Controller
     public function search(Request $request) {        
         $field = key($request->all());
         $value = current($request->all());
-        $product = Product::where($field, 'like', "%{$value}%")->paginate(15);
+        $product = Product::where($field, 'like', "%{$value}%")->orderBy('title', 'asc')->paginate(15);
         
         return response()->json($product);
     }
