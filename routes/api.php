@@ -40,6 +40,12 @@ Route::group([
         Route::get('search', 'ProductController@search');
     });
 
+    Route::group([
+        'prefix' => 'categories'
+    ], function () {
+        Route::get('search', 'CategoriesController@search');
+    });
+
     Route::resource('categories','CategoriesController');
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');
