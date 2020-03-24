@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected static function boot() {
+        parent::boot();
+        static::addGlobalScope(new OrderScope('title', 'asc'));
+    }
+
     protected $fillable = [
         'title', 'ref', 'application', 'value_cost', 'value_sell', 'amount', 'category_id'
     ];
