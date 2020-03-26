@@ -14,7 +14,7 @@ class SalesController extends Controller
      */
     public function index()
     {
-        $sales = Sales::paginate(15);
+        $sales = Sales::with(['product'])->paginate(15);
 
         return response()->json($sales);
     }
