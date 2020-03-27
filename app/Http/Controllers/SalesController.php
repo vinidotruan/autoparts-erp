@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Sales;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class SalesController extends Controller
 {
@@ -27,6 +29,9 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
+        if( (Product::find($request->product_id)->amount - $request->amount) < 0) {
+            throw ValidationException::withMessages(['amount' => 'Sem estoque suficiente']);
+        }
         $sale = Sales::create($request->all());
         $sale->product->amount -= $sale->amount;
         $sale->product->save();
@@ -66,6 +71,7 @@ class SalesController extends Controller
      */
     public function destroy(Sales $sale)
     {
+        $sale->products()->detach();
         $sale->delete();
 
         return response()->json(["message" => "Sale deleted"]);

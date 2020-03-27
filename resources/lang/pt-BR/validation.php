@@ -130,8 +130,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'message' => [
+            'amount' => 'custom-message',
+        ],
+        'mensagem' => [
+            'amount' => 'O campo mensagem é obrigatório.',
         ],
     ],
 
@@ -148,6 +151,7 @@ return [
 
     'attributes' => [
         'address'   => 'endereço',
+        'amount'   => 'quantidade',
         'age'       => 'idade',
         'body'      => 'conteúdo',
         'city'      => 'cidade',
