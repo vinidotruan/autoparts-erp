@@ -26,7 +26,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'ref' => 'required|unique:products',
+            'value_cost' => 'required',
+            'value_sell' => 'required',
+            'amount' => 'required',
+            'category_id' => 'required',
+        ]);
+
         $product = Product::create($request->all());
+        
         return response()->json(['product' => $product, 'message' => 'Product created']);
     }
 
@@ -50,7 +60,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
-    {
+    {        
         $product->update($request->all());
         $product->save();
 

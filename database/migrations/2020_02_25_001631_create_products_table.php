@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id');
             $table->string('title');
-            $table->unsignedBigInteger('ref');
+            $table->string('ref')->unique();
             $table->text('application');
             $table->double('value_cost');
             $table->double('value_sell');

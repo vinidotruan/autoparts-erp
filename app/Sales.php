@@ -3,10 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Sales extends Model
 {
-    protected $fillable = ["user_id", "product_id", "amount"];
+    protected $fillable = ["user_id", "product_id", "amount", 'date'];
+    protected $appends = ["date"];
+
+    public function getDateAttribute()
+    {
+        $date = new Carbon($this->created_at);
+        return $date->format('d/m/Y');
+    }
 
     public function user()
     {
