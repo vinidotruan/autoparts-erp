@@ -15,7 +15,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         if($request->page === "-1") {
-            return response()->json(["data" => Category::all()]);
+            return response()->json(Category::all());
         }
         $categories = Category::paginate(0);
 
