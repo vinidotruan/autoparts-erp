@@ -7,6 +7,8 @@ use Carbon\Carbon;
 
 class Sales extends Model
 {
+    use RecordsFeed;
+
     protected $fillable = ["user_id", "product_id", "amount", 'date'];
     protected $appends = ["date"];
 

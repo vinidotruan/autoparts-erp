@@ -50,6 +50,7 @@ Route::group([
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');
     Route::resource('users','UsersController');
+    Route::resource('feeds','FeedsController');
 
 });
 
