@@ -14,7 +14,9 @@ class FeedsController extends Controller
      */
     public function index()
     {
-        return response()->json(Feed::paginate(15));
+        $user = auth()->user();
+        $feeds = $user->role->feeds()->paginate(15);
+        return response()->json($feeds);
     }
 
     /**

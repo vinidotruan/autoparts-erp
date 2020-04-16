@@ -12,4 +12,9 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function feeds()
+    {
+        return $this->hasManyThrough(Feed::class, User::class);
+    }
 }

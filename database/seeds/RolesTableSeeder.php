@@ -14,5 +14,17 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => Str::random(10),
         ]);
+
+        DB::table('roles')->insert([
+            'name' => Str::random(10),
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => Str::random(10),
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => Str::random(10),
+        ]);
     }
 }
