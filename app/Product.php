@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use RecordsFeed;
+    use RecordsFeed, Notifiable;
 
     protected static function boot() {
         parent::boot();
-        static::addGlobalScope(new OrderScope('title', 'asc'));
+        static::addGlobalScope(new OrderScope('title', 'asc'));        
     }
 
     protected $fillable = [

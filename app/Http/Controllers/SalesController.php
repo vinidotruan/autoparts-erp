@@ -32,9 +32,14 @@ class SalesController extends Controller
         if( (Product::find($request->product_id)->amount - $request->amount) < 0) {
             throw ValidationException::withMessages(['amount' => 'Sem estoque suficiente']);
         }
+
         if( $request->amount < 0) {
             throw ValidationException::withMessages(['amount' => 'Quantidade inválida']);
         }
+
+        // if((Product::find($request->product_id)->amount - $request->amount) < 100) {
+        //     Notification::send(App\User::all(), new InventoryDown(Product::find($request->product_id)));
+        // }
         
         $sale = Sales::create($request->all());
         $sale->product->amount -= $sale->amount;
