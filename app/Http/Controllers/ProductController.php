@@ -31,7 +31,7 @@ class ProductController extends Controller
             'ref' => 'required|unique:products',
             'value_cost' => 'required',
             'value_sell' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|min:1',
             'category_id' => 'required',
         ]);
 

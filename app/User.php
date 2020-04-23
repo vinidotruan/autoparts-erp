@@ -10,7 +10,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, SoftDeletes;
+    use Notifiable, HasApiTokens, SoftDeletes, RecordsFeed;
 
     /**
      * The attributes that are mass assignable.
@@ -58,5 +58,10 @@ class User extends Authenticatable
     public function logs()
     {
         return $this->hasMany(Logs::class);
+    }
+
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use RecordsFeed;
+
     protected static function boot() {
         parent::boot();
         static::addGlobalScope(new OrderScope('title', 'asc'));
