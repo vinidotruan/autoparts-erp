@@ -15,5 +15,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'value_cost' => $faker->randomFloat(),
         'value_sell' => $faker->randomFloat(),
         'amount' => $faker->randomNumber,
+        'limit_amount' => $faker->randomNumber,
     ];
 });

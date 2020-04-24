@@ -46,6 +46,12 @@ Route::group([
         Route::get('search', 'CategoriesController@search');
     });
 
+    Route::group([
+        'prefix' => 'users'
+    ], function () {
+        Route::get('/{user}/notifications', 'UsersController@notifications');
+    });
+    
     Route::resource('categories','CategoriesController');
     Route::resource('products','ProductController');
     Route::resource('sales','SalesController');

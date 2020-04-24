@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,15 +11,15 @@ use Illuminate\Notifications\Notification;
 class InventoryDown extends Notification
 {
     use Queueable;
-
+    private $product;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Product $product)
     {
-        //
+        $this->product = $product;
     }
 
     /**
@@ -55,6 +56,11 @@ class InventoryDown extends Notification
     public function toArray($notifiable)
     {
         return [
+            'product_id' => $this->product->id,
+            'name' => "Estoque em baixa",
+            'title' => $this->product->title,
+            'ref' => $this->product->ref,
+            'limit_amount' => $this->product->limit_amount,
         ];
     }
 }

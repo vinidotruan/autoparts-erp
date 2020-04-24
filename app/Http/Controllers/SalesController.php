@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Sales;
 use App\Product;
+use App\Notifications\InventoryDown;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -37,9 +39,9 @@ class SalesController extends Controller
             throw ValidationException::withMessages(['amount' => 'Quantidade inválida']);
         }
 
-        // if((Product::find($request->product_id)->amount - $request->amount) < 100) {
-        //     Notification::send(App\User::all(), new InventoryDown(Product::find($request->product_id)));
-        // }
+        if((Product::find($request->product_id)->amount - $request->amount) < Product::find($request->product_id)->limit_amount) {
+            \Notification::send(User::all(), new InventoryDown(Product::find($request->product_id)));
+        }
         
         $sale = Sales::create($request->all());
         $sale->product->amount -= $sale->amount;

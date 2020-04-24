@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use RecordsFeed, Notifiable;
+    use RecordsFeed;
 
     protected static function boot() {
         parent::boot();
@@ -14,7 +14,7 @@ class Product extends Model
     }
 
     protected $fillable = [
-        'title', 'ref', 'application', 'value_cost', 'value_sell', 'amount', 'category_id'
+        'title', 'ref', 'application', 'value_cost', 'value_sell', 'amount', 'category_id', 'limit_amount'
     ];
 
     public function category()
