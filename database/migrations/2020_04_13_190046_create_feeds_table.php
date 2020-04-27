@@ -17,8 +17,8 @@ class CreateFeedsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('type');
-            $table->unsignedBigInteger('feedable_id');
-            $table->string('feedable_type');
+            $table->unsignedBigInteger('feedable_id')->default(1);
+            $table->string('feedable_type')->default('App\User');
             $table->timestamps();
         });
     }

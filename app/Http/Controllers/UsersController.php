@@ -9,7 +9,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::with('role')->paginate(15);
 
         return response()->json($users, 200);
     }
@@ -33,8 +33,14 @@ class UsersController extends Controller
 
     public function notifications(User $user)
     {
-        $notifications = $user->unReadNotifications;
+        $notifications = $user->notifications()->paginate(15);
 
         return response()->json($notifications);
+    }
+
+    public function markAsRead(User $user)
+    {
+        $user->unreadNotifications->markAsRead(); 
+        return response()->json(['message'=> 'read', 200]);
     }
 }

@@ -50,6 +50,7 @@ Route::group([
         'prefix' => 'users'
     ], function () {
         Route::get('/{user}/notifications', 'UsersController@notifications');
+        Route::post('/{user}/notifications/mark-as-read', 'UsersController@markAsRead');
     });
     
     Route::resource('categories','CategoriesController');
