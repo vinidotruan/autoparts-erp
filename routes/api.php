@@ -58,6 +58,7 @@ Route::group([
     Route::resource('sales','SalesController');
     Route::resource('users','UsersController');
     Route::resource('feeds','FeedsController');
+    Route::resource('roles','RolesController');
 
 });
 

@@ -30,6 +30,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
             'cpf' => $request->cpf,
             'email' => $request->email,
+            'role_id' => $request->role_id,
             'activation_token' => Str::random(40)
         ]);
 
