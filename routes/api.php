@@ -62,3 +62,4 @@ Route::group([
 
 });
 
+Route::resource('reports','ReportsObsoleteProductController');

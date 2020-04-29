@@ -27,7 +27,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
+     * ReportObsoleteProduct or log an exception.
      *
      * @param  \Exception  $exception
      * @return void
