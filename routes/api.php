@@ -59,7 +59,6 @@ Route::group([
     Route::resource('users','UsersController');
     Route::resource('feeds','FeedsController');
     Route::resource('roles','RolesController');
-
 });
 
 Route::resource('reports','ReportsObsoleteProductController');

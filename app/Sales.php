@@ -10,13 +10,13 @@ class Sales extends Model
     use RecordsFeed;
 
     protected $fillable = ["user_id", "product_id", "amount", 'date'];
-    protected $appends = ["date"];
+    // protected $appends = ["date"];
 
-    public function getDateAttribute()
-    {
-        $date = new Carbon($this->created_at);
-        return $date->format('d/m/Y');
-    }
+    // public function getDateAttribute()
+    // {
+    //     $date = new Carbon($this->created_at);
+    //     return $date->format('d/m/Y');
+    // } 
 
     public function user()
     {
