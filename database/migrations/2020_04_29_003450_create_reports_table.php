@@ -18,7 +18,7 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('since');
             $table->date('at');
-            $table->text('data');
+            $table->text('products');
             $table->bigInteger('minimun_amount');
             $table->timestamps();
         });

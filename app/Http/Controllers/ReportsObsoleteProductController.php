@@ -15,7 +15,7 @@ class ReportsObsoleteProductController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(ReportObsoleteProduct::paginate(15));
     }
 
     /**
@@ -27,31 +27,32 @@ class ReportsObsoleteProductController extends Controller
     public function store(Request $request)
     {
         $products = Product::whereHas('sales', function($q) use($request) {
-            $q->whereBetween('created_at',[$request->since, $request->at])            
+            $q->whereBetween('date',[$request->since, $request->at])            
             ->havingRaw("sum(amount) > {$request->minimun_amount}");
         })->get();
 
         $newProducts = [];
 
-        // $products->map(function($p, $key) use(&$newProducts) {
-        //     $newProducts[$key]->id = $p->id;
-        //     $newProducts[$key]->value_total = $p->sales->sum('amount');
-        //     $newProducts[$key]->amount_total = $p->sales->sum('amount');
-        // });
+        $products->map(function($p, $key) use(&$newProducts) {
+            $newProducts[] = [
+                "id" => $p->id,
+                "name" => $p->title,
+                "value" => $p->sales->sum('price'),
+                "amount_total" =>  $p->sales->sum('amount')
+            ];
+        });
 
         $data = [
             'user_id' => $request->user_id,
             'since' => $request->since,
             'at' => $request->at,
             'minimun_amount' => $request->minimun_amount,
-            'data' => serialize($newProducts)
+            'products' => serialize($newProducts)
         ];
 
         $re = ReportObsoleteProduct::create($data);
-
-
-        // return response()->json($newProducts);
         return response()->json($re);
+
     }
 
     /**

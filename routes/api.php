@@ -41,17 +41,19 @@ Route::group([
     });
 
     Route::group([
-        'prefix' => 'categories'
-    ], function () {
-        Route::get('search', 'CategoriesController@search');
-    });
-
-    Route::group([
         'prefix' => 'users'
     ], function () {
         Route::get('/{user}/notifications', 'UsersController@notifications');
         Route::post('/{user}/notifications/mark-as-read', 'UsersController@markAsRead');
     });
+
+    Route::group([
+        'prefix' => 'categories'
+    ], function () {
+        Route::get('search', 'CategoriesController@search');
+    });
+
+    
     
     Route::resource('categories','CategoriesController');
     Route::resource('products','ProductController');
@@ -59,6 +61,5 @@ Route::group([
     Route::resource('users','UsersController');
     Route::resource('feeds','FeedsController');
     Route::resource('roles','RolesController');
+    Route::resource('reports','ReportsObsoleteProductController');    
 });
-
-Route::resource('reports','ReportsObsoleteProductController');
