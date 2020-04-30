@@ -12,6 +12,7 @@ class SalesTableSeeder extends Seeder
      */
     public function run()
     {
+        // Comentário de revisão
         factory(Sales::class, 1000)->create();
 
     }
