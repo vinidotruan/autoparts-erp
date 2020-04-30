@@ -28,17 +28,30 @@ class ReportsObsoleteProductController extends Controller
     {
         $products = Product::whereHas('sales', function($q) use($request) {
             $q->whereBetween('created_at',[$request->since, $request->at])            
-            ->havingRaw("sum(amount) > {$request->amount}");
+            ->havingRaw("sum(amount) > {$request->minimun_amount}");
         })->get();
 
         $newProducts = [];
 
-        $products->map(function($p, $key) use(&$newProducts) {
-            $newProducts[] = $p;
-            $newProducts[$key]->amount_total = $p->sales->sum('amount');
-        });
+        // $products->map(function($p, $key) use(&$newProducts) {
+        //     $newProducts[$key]->id = $p->id;
+        //     $newProducts[$key]->value_total = $p->sales->sum('amount');
+        //     $newProducts[$key]->amount_total = $p->sales->sum('amount');
+        // });
 
-        return response()->json($newProducts);
+        $data = [
+            'user_id' => $request->user_id,
+            'since' => $request->since,
+            'at' => $request->at,
+            'minimun_amount' => $request->minimun_amount,
+            'data' => serialize($newProducts)
+        ];
+
+        $re = ReportObsoleteProduct::create($data);
+
+
+        // return response()->json($newProducts);
+        return response()->json($re);
     }
 
     /**
