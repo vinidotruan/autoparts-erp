@@ -61,5 +61,11 @@ Route::group([
     Route::resource('users','UsersController');
     Route::resource('feeds','FeedsController');
     Route::resource('roles','RolesController');
-    Route::resource('reports','ReportsObsoleteProductController');    
+
+});
+Route::group([
+    'prefix' => 'reports'
+], function () {
+    Route::post('obsolete-products', 'ReportsController@obsoleteProducts');
+    Route::get('inventory-down-products', 'ReportsController@inventoryDown');
 });
