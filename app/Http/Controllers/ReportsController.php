@@ -43,7 +43,6 @@ class ReportsController extends Controller
 
         $re = ReportObsoleteProduct::create($data);
         return response()->json($re);
-}
     }
 
     public function inventoryDown()
