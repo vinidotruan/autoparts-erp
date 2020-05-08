@@ -31,4 +31,10 @@ class Product extends Model
     {
         return $this->hasMany(Sales::class);
     }
+
+    public function scopeWhereInventoryDown($query)
+    {
+        return $query->whereRaw('amount < limit_amount');
+
+    }
 }

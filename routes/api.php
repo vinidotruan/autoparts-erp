@@ -68,4 +68,10 @@ Route::group([
 ], function () {
     Route::post('obsolete-products', 'ReportsController@obsoleteProducts');
     Route::get('inventory-down-products', 'ReportsController@inventoryDown');
+    Route::group([
+        'prefix' => 'pdf'
+    ], function() {
+        Route::get('get-inventory-down-products', 'PDF\ReportsController@getInventoryDownProducts');
+        Route::get('download-inventory-down-products', 'PDF\ReportsController@downloadInventoryDownProducts');
+    });
 });

@@ -47,7 +47,7 @@ class ReportsController extends Controller
 
     public function inventoryDown()
     {
-        $products = Product::with('category')->whereRaw('amount < limit_amount')->get();
+        $products = Product::with('category')->whereInventoryDown()->get();
         return response()->json($products);
     }
 }
