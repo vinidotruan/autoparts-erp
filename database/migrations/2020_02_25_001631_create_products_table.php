@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('ref')->unique();
             $table->text('application');
-            $table->double('value_cost');
-            $table->double('value_sell');
+            $table->double('value_cost',15,2);
+            $table->double('value_sell',15,2);
             $table->unsignedInteger('amount');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();

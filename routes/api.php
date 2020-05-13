@@ -73,5 +73,8 @@ Route::group([
     ], function() {
         Route::get('get-inventory-down-products', 'PDF\ReportsController@getInventoryDownProducts');
         Route::get('download-inventory-down-products', 'PDF\ReportsController@downloadInventoryDownProducts');
+        
+        Route::get('get-obsolete-products/{id}', 'PDF\ReportsController@getObsoleteProducts');
+        Route::get('download-obsolete-products/{reportObsoleteProduct}', 'PDF\ReportsController@downloadObsoleteProducts');
     });
 });
