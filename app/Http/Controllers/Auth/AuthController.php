@@ -30,6 +30,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
             'cpf' => $request->cpf,
             'email' => $request->email,
+            'role_id' => $request->role_id,
             'activation_token' => Str::random(40)
         ]);
 
@@ -83,6 +84,7 @@ class AuthController extends Controller
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'id' => $user->id,
+            'role_id' => $user->role_id,
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
             )->toDateTimeString()

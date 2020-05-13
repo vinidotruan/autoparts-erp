@@ -9,9 +9,11 @@ trait RecordsFeed
         static::created(function($model){
             $model->recordFeed('created');
         });
+
         static::deleted(function($model){
             $model->recordFeed('deleted');
         });
+
         static::updated(function($model){
             $model->recordFeed('updated');
         });
@@ -25,7 +27,7 @@ trait RecordsFeed
     protected function recordFeed($event)
     {        
         $this->feeds()->create([
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id() ?? 1,
             'type' => $event.'_'.strtolower(class_basename($this))
         ]);
     }

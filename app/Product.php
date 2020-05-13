@@ -10,11 +10,11 @@ class Product extends Model
 
     protected static function boot() {
         parent::boot();
-        static::addGlobalScope(new OrderScope('title', 'asc'));
+        static::addGlobalScope(new OrderScope('title', 'asc'));        
     }
 
     protected $fillable = [
-        'title', 'ref', 'application', 'value_cost', 'value_sell', 'amount', 'category_id'
+        'title', 'ref', 'application', 'value_cost', 'value_sell', 'amount', 'category_id', 'limit_amount'
     ];
 
     public function category()
@@ -30,5 +30,11 @@ class Product extends Model
     public function sales()
     {
         return $this->hasMany(Sales::class);
+    }
+
+    public function scopeWhereInventoryDown($query)
+    {
+        return $query->whereRaw('amount < limit_amount');
+
     }
 }
