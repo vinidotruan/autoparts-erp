@@ -41,7 +41,7 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/password/find/'.$this->token);
+        $url = env('APP_FRONTEND_URL', null)."/recovery-password?token=$this->token";
         return (new MailMessage)
             ->line('Você está recebendo este email por que nos recebemos uma requisição para resetar a senha da sua conta.')
             ->action('Resetar Senha', url($url))

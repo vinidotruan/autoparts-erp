@@ -30,4 +30,4 @@ Observações:
 
  - Todas as informações para testar o "reset" de password estão contidas [neste artigo](https://medium.com/modulr/api-rest-with-laravel-5-6-passport-authentication-reset-password-part-4-50d27455dcca)
 
- - Fora instalado o laravel cors
+ - É necessário setar a variável `APP_FRONTEND_URL=http://localhost:4200` no .env
