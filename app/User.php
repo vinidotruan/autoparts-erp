@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Feed::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->role_id === 1;
+    }
 }

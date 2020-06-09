@@ -16,15 +16,11 @@ class RolesTableSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Vendedor',
+            'name' => 'Nivel 2',
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Estoquista',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Qualquer',
+            'name' => 'Nivel 3',
         ]);
     }
 }
