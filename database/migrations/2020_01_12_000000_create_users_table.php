@@ -29,20 +29,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        // Admin default user
-        DB::table('users')->insert(
-            array(
-                'name' => 'admin',
-                'email' => 'admin@admin',
-                'user' => 'admin',
-                'active' => 1,
-                'activation_token' => 'admin',
-                'cpf' => 04037131021,
-                'password' => Hash::make('password'),
-                'role_id' => 1
-            )
-        );
     }
 
     /**
