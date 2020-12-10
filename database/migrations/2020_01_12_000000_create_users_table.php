@@ -39,9 +39,7 @@ class CreateUsersTable extends Migration
                 'active' => 1,
                 'cpf' => 04037131021,
                 'password' => Hash::make('password'),
-                'role_id' => 1,
-                'gender_id' => 1,
-                'value' => 1
+                'role_id' => 1
             )
         );
     }
