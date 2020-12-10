@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
                 'email' => 'admin@admin',
                 'user' => 'admin',
                 'active' => 1,
+                'activation_token' => 'admin',
                 'cpf' => 04037131021,
                 'password' => Hash::make('password'),
                 'role_id' => 1
