@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Str;
 use App\Notifications\SignupActivate;
+use Exception;
 
 class UsersController extends Controller
 {
@@ -17,21 +18,22 @@ class UsersController extends Controller
     }
 
     public function store(Request $request)
-    {        
-        $user = User::create([
-            'name' => $request->name,
-            'user' => $request->user,
-            'password' => bcrypt($request->password),
-            'cpf' => $request->cpf,
-            'email' => $request->email,
-            'role_id' => $request->role_id,
-            'activation_token' => Str::random(40)
-        ]);
-
-        $user->notify(new SignupActivate($user));
-
-
-        return response()->json($request->all(), 200);
+    { 
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'user' => $request->user,
+                'password' => bcrypt($request->password),
+                'cpf' => $request->cpf,
+                'email' => $request->email,
+                'role_id' => $request->role_id,
+                'activation_token' => Str::random(40)
+            ]);
+            return response()->json($request->all(), 200);
+        } 
+        catch (Exception $e) {
+            return response()->json(["message"=>'Usuário já cadastrado'], 500);
+        }
     }
 
      /**
