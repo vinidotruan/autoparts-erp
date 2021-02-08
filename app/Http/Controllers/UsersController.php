@@ -31,8 +31,12 @@ class UsersController extends Controller
             ]);
             return response()->json($request->all(), 200);
         } 
-        catch (Exception $e) {
-            return response()->json(["message"=>'Usuário já cadastrado'], 500);
+        catch (Exception $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                return response()->json(["message"=>'Usuário já cadastrado'], 500);
+            }
+            return response()->json(["message"=>'Erro ao cadastrar.'], 500);
         }
     }
 
