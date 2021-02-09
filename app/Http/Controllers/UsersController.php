@@ -27,7 +27,8 @@ class UsersController extends Controller
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'role_id' => $request->role_id,
-                'activation_token' => Str::random(40)
+                'activation_token' => Str::random(40),
+                'active' => 1
             ]);
             return response()->json($request->all(), 200);
         } 
