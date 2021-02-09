@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('user')->unique();
             $table->unsignedBigInteger('cpf');
             $table->string('email');
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->string('activation_token');
             $table->unsignedBigInteger('role_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();

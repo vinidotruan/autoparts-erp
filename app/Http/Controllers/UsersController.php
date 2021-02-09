@@ -20,15 +20,14 @@ class UsersController extends Controller
     public function store(Request $request)
     { 
         try {
-            $user = User::create([
+            User::create([
                 'name' => $request->name,
                 'user' => $request->user,
                 'password' => bcrypt($request->password),
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'role_id' => $request->role_id,
-                'activation_token' => Str::random(40),
-                'active' => 1
+                'activation_token' => Str::random(40)
             ]);
             return response()->json($request->all(), 200);
         } 
