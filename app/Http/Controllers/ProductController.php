@@ -31,7 +31,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required',
             'ref' => 'required|unique:products',
             'value_cost' => 'required',
@@ -39,9 +39,8 @@ class ProductController extends Controller
             'amount' => 'required|min:1',
             'category_id' => 'required',
         ]);
-
         $product = Product::create($request->all());
-        
+
         return response()->json(['product' => $product, 'message' => 'Product created']);
     }
 
@@ -65,7 +64,15 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
-    {        
+    {
+        $request->validate([
+            'title' => 'required',
+            'ref' => 'required|unique:products',
+            'value_cost' => 'required',
+            'value_sell' => 'required',
+            'amount' => 'required|min:1',
+            'category_id' => 'required',
+        ]);
         $product->update($request->all());
         $product->save();
 
@@ -84,11 +91,11 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product deleted']);
     }
 
-    public function search(Request $request) {        
+    public function search(Request $request) {
         $field = key($request->all());
         $value = current($request->all());
         $product = Product::where($field, 'like', "%{$value}%")->paginate(15);
-        
+
         return response()->json($product);
     }
 }
