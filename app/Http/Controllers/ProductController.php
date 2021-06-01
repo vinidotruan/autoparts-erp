@@ -65,7 +65,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        if(Product::where('ref', '=', $request->ref)->first()) {
+        if(
+            Product::where('ref', '=', $request->ref)->first()->id !=
+            $request->id
+        ) {
             return response()->json([
                 'message' => 'Referência já cadastrada',
                 'errors' => ['ref' => 'Duplicada']
