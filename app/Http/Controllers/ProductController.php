@@ -65,14 +65,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $request->validate([
-            'title' => 'required',
-            'ref' => 'required|unique:products',
-            'value_cost' => 'required',
-            'value_sell' => 'required',
-            'amount' => 'required|min:1',
-            'category_id' => 'required',
-        ]);
+        if(Product::where('ref', '=', $request->ref)->first()) {
+            return response()->json([
+                'message' => 'Referência já cadastrada',
+                'errors' => ['ref' => 'Duplicada']
+            ], 422);
+        }
         $product->update($request->all());
         $product->save();
 
