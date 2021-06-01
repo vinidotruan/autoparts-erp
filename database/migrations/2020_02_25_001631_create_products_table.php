@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->double('value_sell',15,2);
             $table->unsignedInteger('amount');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }
