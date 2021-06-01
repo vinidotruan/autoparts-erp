@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('limit_amount');
             $table->string('title');
-            $table->string('ref')->unique();
+            $table->string('ref');
             $table->text('application');
             $table->double('value_cost',15,2);
             $table->double('value_sell',15,2);

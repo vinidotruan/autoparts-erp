@@ -68,7 +68,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        if(Product::where('ref', $request->ref)->first()) {
+        $existingId = Product::where('ref', $request->ref)
+            ->where('deleted', 0)
+            ->first()->id ?? null;
+
+        if ($existingId && ($existingId != $request->id)) {
             return response()->json([
                 'message' => 'Referência já cadastrada',
                 'errors' => ['ref' => 'Duplicada']
@@ -96,7 +100,9 @@ class ProductController extends Controller
     public function search(Request $request) {
         $field = key($request->all());
         $value = current($request->all());
-        $product = Product::where($field, 'like', "%{$value}%")->paginate(15);
+        $product = Product::where($field, 'like', "%{$value}%")
+            ->where('deleted', 0)
+            ->paginate(15);
 
         return response()->json($product);
     }
