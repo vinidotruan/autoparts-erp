@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Facades\Input;
 
 class ProductController extends Controller
 {
@@ -20,7 +19,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(Product::paginate(15), 200);
+        return response()->json(Product::where('deleted', 0)
+            ->paginate(15), 200);
     }
 
     /**
@@ -41,7 +41,10 @@ class ProductController extends Controller
         ]);
         $product = Product::create($request->all());
 
-        return response()->json(['product' => $product, 'message' => 'Product created']);
+        return response()->json([
+            'product' => $product,
+            'message' => 'Product created'
+        ]);
     }
 
     /**
@@ -65,7 +68,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        if(Product::where('ref', '=', $request->ref)->first()) {
+        if(Product::where('ref', $request->ref)->first()) {
             return response()->json([
                 'message' => 'Referência já cadastrada',
                 'errors' => ['ref' => 'Duplicada']
@@ -85,7 +88,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        Product::where('id', $product->id)
+            ->update(["deleted" => 1]);
         return response()->json(['message' => 'Product deleted']);
     }
 
