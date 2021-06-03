@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('user')->unique();
-            $table->unsignedBigInteger('cpf');
+            $table->string('cpf');
             $table->string('email');
             $table->boolean('active')->default(true);
             $table->string('activation_token');
