@@ -16,7 +16,7 @@
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
-        "lcobucci/jwt": "3.4.0",
+        "lcobucci/jwt": "3.4.6",
         "lucascudo/laravel-pt-br-localization": "^1.0",
         "pusher/pusher-php-server": "~3.0"
     },
